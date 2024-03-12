@@ -1,0 +1,11 @@
+{
+    "name": "joao-bittencourt/user-colors",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "UserColors\\": "src/"
+        }
+    },
+    "require": {}
+}
