@@ -56,4 +56,5 @@ class Controller
             unset($_SESSION['FLASH_MESSAGES'][$messageKey]);
         }
     }
+
 }

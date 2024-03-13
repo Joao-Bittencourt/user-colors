@@ -2,6 +2,7 @@
 
 include __DIR__ . '/vendor/autoload.php';
 
+use UserColors\database\migrator;
 use UserColors\Router;
 
 session_start();
@@ -22,5 +23,14 @@ $router->addRoute('GET', '/colors', 'ColorsController@index');
 $router->addRoute('GET', '/colors/create', 'ColorsController@create');
 $router->addRoute('POST', '/colors/store', 'ColorsController@store');
 $router->addRoute('POST', '/colors/delete/{id}', 'ColorsController@delete');
+
+$router->addRoute('GET', '/migrate', function () {
+    migrator::migrate();
+});
+$router->addRoute('GET', '/seed', function () {
+    migrator::seed();
+});
+
+
 
 $router->handleRequest($requestMethod, $requestPath);

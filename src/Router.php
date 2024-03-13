@@ -61,6 +61,12 @@ class Router
     private function executeHandler($handler)
     {
 
+        if (is_callable($handler)) {
+                // If the handler is a callable function, call it
+            call_user_func($handler, $this->params);
+            return;
+        }
+
         list($controller, $action) = explode('@', $handler);
 
         if (empty($controller)) {
