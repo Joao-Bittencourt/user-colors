@@ -2,7 +2,7 @@
 <html lang="br">
 
 <head>
-    <title>Lista usuário</title>
+    <title>Lista cores</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -12,17 +12,20 @@
 <body>
 
     <?php include __dir__ . '/navbar.php'; ?>
-    <div class="container">
 
+    <div class="container">
+        <div class="mt-3">
+            <?php $this->displayFlasMessage(); ?>
+        </div>
         <div class="card mt-3">
             <div class="card-header">
 
                 <div class="row">
                     <div class="col-md-11">
-                        Usuários
+                        Cores
                     </div>
                     <div class="col-md-1">
-                        <a href="/users/create" class="btn btn-sm btn-success text-decorator-none">
+                        <a href="/colors/create" class="btn btn-sm btn-success text-decorator-none">
                             <i class="bi bi-pencil-square"> Cadastrar</i>
                         </a>
                     </div>
@@ -34,25 +37,25 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nome</th>
-                            <th>Email</th>
+                            <th>Cor</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $trs = '';
-                        $users = $users ?? [];
-                        foreach ($users as $user) {
+                        $colors = $colors ?? [];
+                        foreach ($colors as $color) {
 
                             $trs .= '<tr>';
-                            $trs .= '<th scope="row">' . $user->id . '</th>';
-                            $trs .= '<td>' . $user->name . '</td>';
-                            $trs .= '<td>' . $user->email . '</td>';
+                            $trs .= '<th scope="row">' . $color->id . '</th>';
+                            $trs .= '<td>' . $color->name . '</td>';
                             $trs .= '<td>
-                        <a href="#">Editar</a>
-                        <a href="#">Excluir</a>
-                        </td>';
+                            <form action="/colors/delete/' . $color->id . '" method="POST" >
+                                <input type="hidden" value= "' . $color->id . '">
+                                <button class="btn btn-outline-danger" type="submit">excluir</button>
+                            </form>
+                            </td>';
                             $trs .= '</tr>';
                         }
 

@@ -33,7 +33,7 @@ class Connection
     public function query($query)
     {
         $result = $this->getConnection()->query($query);
-        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->setFetchMode(PDO::FETCH_OBJ);
         
         return $result->fetchAll();
     }

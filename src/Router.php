@@ -19,16 +19,21 @@ class Router
         try {
             $this->execute($method, $path);
         } catch (Exception $e) {
-            
-            var_dump($e->getMessage());
+
+            $error['message'] = $e->getMessage();
+            $error['type'] = 'danger text-center';
+
+            echo require __dir__ . '/views/exception.php';
         }
-        return;        
     }
 
-    private function execute($method, $path) {
+    private function execute($method, $path)
+    {
 
-        foreach ($this->routes[$method] as $route => $handler) {
-            
+        $routesMethod = $this->routes[$method] ?? [];
+
+        foreach ($routesMethod as $route => $handler) {
+
             if ($this->routeMatches($route, $path)) {
                 $this->executeHandler($handler);
                 return;
@@ -73,6 +78,32 @@ class Router
             throw new \Exception("{$action} not exists in {$controller}", 404);
         }
 
-        $controllerInstance->$action(...$this->params);
+        $controllerInstance->data['request'] = $this->getRequestData();
+        $controllerInstance->$action($this->params);
+        echo $controllerInstance->layout();
+    }
+
+    private function getRequestData()
+    {
+
+        switch ($this->getMethod()) {
+            case 'GET':
+                return $_GET;
+
+            case 'DELETE':
+            case 'POST':
+                $data = json_decode(file_get_contents('php://input'));
+
+                if (is_null($data)) {
+                    $data = $_POST;
+                }
+
+            return (array) $data;
+        }
+    }
+
+    public function getMethod()
+    {
+        return $_SERVER['REQUEST_METHOD'];
     }
 }
