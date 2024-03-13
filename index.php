@@ -12,6 +12,7 @@ $requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $router = new Router();
 
+$router->addRoute('GET', '/', 'UsersController@index');
 $router->addRoute('GET', '/users', 'UsersController@index');
 $router->addRoute('GET', '/users/create', 'UsersController@create');
 $router->addRoute('POST', '/users/store', 'UsersController@store');
