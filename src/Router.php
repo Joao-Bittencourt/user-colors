@@ -40,7 +40,7 @@ class Router
             }
         }
 
-        throw new \Exception("Not Found.", 404);
+        throw new Exception("Not Found.", 404);
     }
 
     private function routeMatches($route, $path)
@@ -64,18 +64,18 @@ class Router
         list($controller, $action) = explode('@', $handler);
 
         if (empty($controller)) {
-            throw new \Exception("Controller not exists.", 404);
+            throw new Exception("Controller not exists.", 404);
         }
 
         if (!class_exists("\UserColors\Controllers\\$controller")) {
-            throw new \Exception("{$controller} not exists.", 404);
+            throw new Exception("{$controller} not exists.", 404);
         }
 
         $controllerWithNameSpace = "\UserColors\Controllers\\$controller";
         $controllerInstance = new $controllerWithNameSpace();
 
         if (!method_exists($controllerInstance, $action)) {
-            throw new \Exception("{$action} not exists in {$controller}", 404);
+            throw new Exception("{$action} not exists in {$controller}", 404);
         }
 
         $controllerInstance->data['request'] = $this->getRequestData();

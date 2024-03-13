@@ -15,7 +15,7 @@ $router->addRoute('GET', '/users', 'UsersController@index');
 $router->addRoute('GET', '/users/create', 'UsersController@create');
 $router->addRoute('POST', '/users/store', 'UsersController@store');
 $router->addRoute('GET', '/users/edit/{id}', 'UsersController@edit');
-$router->addRoute('POST', '/users/edit/{id}', 'UsersController@update');
+$router->addRoute('POST', '/users/update/{id}', 'UsersController@update');
 $router->addRoute('POST', '/users/delete/{id}', 'UsersController@delete');
 
 $router->addRoute('GET', '/colors', 'ColorsController@index');

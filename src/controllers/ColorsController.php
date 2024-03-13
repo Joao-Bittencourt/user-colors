@@ -51,7 +51,7 @@ class ColorsController extends Controller
         if (is_numeric($id)) {
 
             $connection = new Connection();
-            $color = $connection->query("SELECT * FROM colors WHERE id = $id;");
+            $color = $connection->query("SELECT 1 FROM colors WHERE id = $id;");
             
             if (empty($color)) {
                 $this->createFlashMessage("Cor #$id inexistente!", 'info');               

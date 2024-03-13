@@ -14,6 +14,10 @@
     <?php include __dir__ . '/navbar.php'; ?>
     <div class="container">
 
+        <div class="mt-3">
+            <?php $this->displayFlasMessage(); ?>
+        </div>
+
         <div class="card mt-3">
             <div class="card-header">
 
@@ -23,7 +27,7 @@
                     </div>
                     <div class="col-md-1">
                         <a href="/users/create" class="btn btn-sm btn-success text-decorator-none">
-                            <i class="bi bi-pencil-square"> Cadastrar</i>
+                            Cadastrar
                         </a>
                     </div>
                 </div>
@@ -50,9 +54,12 @@
                             $trs .= '<td>' . $user->name . '</td>';
                             $trs .= '<td>' . $user->email . '</td>';
                             $trs .= '<td>
-                        <a href="#">Editar</a>
-                        <a href="#">Excluir</a>
-                        </td>';
+                            <a class="btn btn-sm btn-outline-warning" href="/users/edit/' . $user->id . '">editar</a>
+                            <form action="/users/delete/' . $user->id . '" method="POST" >
+                                <input type="hidden" value= "' . $user->id . '">
+                                <button class="btn btn-sm btn-outline-danger" type="submit">excluir</button>
+                            </form>
+                            </td>';
                             $trs .= '</tr>';
                         }
 
