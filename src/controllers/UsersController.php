@@ -10,7 +10,6 @@ use UserColors\models\UserColor;
 
 class UsersController extends Controller
 {
-
     public function index()
     {
         $this->render = 'users_list';
@@ -33,12 +32,10 @@ class UsersController extends Controller
 
     public function store()
     {
-
         $user = new User();
         $user->save($this->data['request']);
 
         if (!empty($user->validationErrors)) {
-
             foreach ($user->validationErrors as $error) {
                 $this->createFlashMessage($error, 'danger');
             }
@@ -63,7 +60,7 @@ class UsersController extends Controller
 
         $connection = new Connection();
         $user = $connection->query("SELECT * FROM users WHERE id = $id;");
-        
+
 
         if (empty($user)) {
             $this->createFlashMessage("User #$id inexistente!", 'info');
@@ -71,7 +68,7 @@ class UsersController extends Controller
         }
 
         $colors = $connection->query("SELECT * FROM colors;");
-        $userColors =(new UserColor())->findListColorIdInUserColor($id);
+        $userColors = (new UserColor())->findListColorIdInUserColor($id);
 
         $this->data['user'] = $user[0];
         $this->data['colors'] = $colors;
@@ -86,7 +83,6 @@ class UsersController extends Controller
         $user->update($id, $this->data['request']);
 
         if (!empty($user->validationErrors)) {
-
             foreach ($user->validationErrors as $error) {
                 $this->createFlashMessage($error, 'danger');
             }
@@ -101,11 +97,9 @@ class UsersController extends Controller
 
     public function delete($params)
     {
-
         $id = $params['id'] ?? null;
 
         if (is_numeric($id)) {
-
             $connection = new Connection();
             $user = $connection->query("SELECT 1 FROM users WHERE id = $id;");
 

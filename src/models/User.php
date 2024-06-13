@@ -6,7 +6,6 @@ use UserColors\database\Connection;
 
 class User
 {
-
     public $validationErrors = [];
 
     public function save(array $data)
@@ -14,7 +13,6 @@ class User
         $this->validate($data);
 
         if (empty($this->validationErrors)) {
-
             $con = new Connection();
             $query = $con->getConnection()->prepare("INSERT INTO users (name, email)values ( :name, :email)");
             $query->bindParam(':name', $data['name'], \PDO::PARAM_STR);
@@ -25,11 +23,9 @@ class User
 
     public function update(int $id, array $data)
     {
-
         $this->validate($data);
 
         if (empty($this->validationErrors)) {
-
             $con = new Connection();
             $query = $con->getConnection()->prepare("UPDATE users SET name = :name, email = :email WHERE id = :id");
             $query->bindParam(':id', $id, \PDO::PARAM_INT);
