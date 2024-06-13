@@ -7,7 +7,6 @@ use stdClass;
 
 class Connection
 {
-
     private $databaseFile;
     private $connection;
 
@@ -34,7 +33,7 @@ class Connection
     {
         $result = $this->getConnection()->query($query);
         $result->setFetchMode(PDO::FETCH_OBJ);
-        
+
         return $result->fetchAll();
     }
 }

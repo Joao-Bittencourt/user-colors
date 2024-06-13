@@ -19,7 +19,6 @@ class Router
         try {
             $this->execute($method, $path);
         } catch (Exception $e) {
-
             $error['message'] = $e->getMessage();
             $error['type'] = 'danger text-center';
 
@@ -29,11 +28,9 @@ class Router
 
     private function execute($method, $path)
     {
-
         $routesMethod = $this->routes[$method] ?? [];
 
         foreach ($routesMethod as $route => $handler) {
-
             if ($this->routeMatches($route, $path)) {
                 $this->executeHandler($handler);
                 return;
@@ -45,7 +42,6 @@ class Router
 
     private function routeMatches($route, $path)
     {
-
         $routePattern = preg_replace('/\{(\w+)\}/', '(?P<$1>\w+)', $route);
         $routePattern = str_replace('/', '\/', $routePattern);
         $routePattern = '/^' . $routePattern . '$/';
@@ -60,9 +56,8 @@ class Router
 
     private function executeHandler($handler)
     {
-
         if (is_callable($handler)) {
-                // If the handler is a callable function, call it
+            // If the handler is a callable function, call it
             call_user_func($handler, $this->params);
             return;
         }
@@ -91,7 +86,6 @@ class Router
 
     private function getRequestData()
     {
-
         switch ($this->getMethod()) {
             case 'GET':
                 return $_GET;
@@ -104,7 +98,7 @@ class Router
                     $data = $_POST;
                 }
 
-            return (array) $data;
+                return (array) $data;
         }
     }
 

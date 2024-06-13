@@ -4,7 +4,6 @@ namespace UserColors\Controllers;
 
 class Controller
 {
-
     public $data = [];
     public $render = '';
     private $defaultPathToViews = '/../views/';
@@ -12,7 +11,6 @@ class Controller
 
     public function layout($data = [])
     {
-
         $file =  __dir__ . $this->defaultPathToViews . $this->render . $this->defaultExtensionViews;
 
         if (!file_exists($file)) {
@@ -41,7 +39,6 @@ class Controller
 
     public function displayFlasMessage()
     {
-
         if (!isset($_SESSION['FLASH_MESSAGES'])) {
             return;
         }
@@ -52,9 +49,8 @@ class Controller
                 $message['type'],
                 $message['message']
             );
-            
+
             unset($_SESSION['FLASH_MESSAGES'][$messageKey]);
         }
     }
-
 }
